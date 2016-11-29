@@ -1,20 +1,12 @@
 var request = require("request");
 var myURL = 'http://www.omdbapi.com/?t=';
 
-
-function get(movieTitle) {
-	var results = request(myURL + movieTitle);
-	results = JSON.parse(results);	 
-    console.log(results);
-    console.log(results.title);
-  		
+var get = function(movieTitle) {
+	var movie = request(myURL + movieTitle, function(error, response, body) {
+		var result = JSON.parse(body);
+		console.log(result);
+		console.log(result.title);
+	});
 };
 
-
-get("Pulp Fiction");
-
-
-//request ('http://www.omdbapi.com/?t=pulp%20fiction')
-
-
-module.exports = get();
+module.exports = get;
